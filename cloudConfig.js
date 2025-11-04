@@ -12,7 +12,10 @@ const storage = new CloudinaryStorage({
   params: {
     folder: 'LovelyPlaces_DEV',
     allowedFormat: ['png','jpg','jpeg'], 
-    public_id: (req, file) => 'computed-filename-using-request',
+    public_id: (req, file) => {
+      const uniqueName = `${Date.now()}_${file.originalname}`;
+      return uniqueName.replace(/\s+/g, '_');
+    },
   },
 });
 

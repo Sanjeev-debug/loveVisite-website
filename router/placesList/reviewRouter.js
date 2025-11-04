@@ -25,19 +25,22 @@ router.post("/addReview/:id",isAuth,wrapAsync(async(req,res)=>{
         await listing.save();
 
         console.log("review saved")
-         const populatedListing = await listing.populate("reviews");
+         const populatedListing = await listing.populate({ path: "reviews", populate: { path: "author", } });
+        
         res.json(populatedListing );
 
        }));
 
 router.post('/deleteReview/:id/:reviewId',isAuth,isReviewAuthor,wrapAsync( async(req,res)=>{
+    const listing = await PlacesList.findById(req.params.id);
             const {id,reviewId}=req.params;
             console.log(id,reviewId)
             await PlacesList.findByIdAndUpdate(id,{$pull:{reviews : reviewId}});
             
        const deleted= await Review.findByIdAndDelete(reviewId);
         console.log(deleted)
-        res.json("hello");
+        const populatedListing = await listing.populate({ path: "reviews", populate: { path: "author", } });
+        res.json(populatedListing);
     
      
 }));

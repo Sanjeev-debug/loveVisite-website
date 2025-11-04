@@ -28,7 +28,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
 app.set('trust proxy', 1);
 
 
@@ -104,11 +104,11 @@ app.all(/.*/,(req,res,next)=>{
     next(new MyError(404 , "Page Not Found"))
 });
 
-app.use((err,req,res,next)=>{
-    let {status=500,message="something went  wrong"}=err;
-    console.log(message,status);
-    res.status(status).json(message);
+// app.use((err,req,res,next)=>{
+//     let {status=500,message="something went  wrong"}=err;
+//     console.log(message,status);
+//     res.status(status).json(message);
     
-});
+// });
 
 app.listen(PORT,()=>{console.log(`server is runnning on PORT : ${PORT}`)});

@@ -13,8 +13,8 @@ main().then(()=>{console.log('Connected MongoDB Atlas')}).catch((err)=>{console.
 
 const initDB=async()=>{
   await  PlacesList.deleteMany({});
- initData.data= initData.data.map((obj)=>({...obj,owner:'68f8eb398cf41c9539480bcd'}))
-  await  PlacesList.insertMany(initData.data)
+//  initData.data= initData.data.map((obj)=>({...obj,owner:'68f8eb398cf41c9539480bcd'}))
+//   await  PlacesList.insertMany(initData.data)
     console.log('data was initialized')
 }
 
